@@ -1,11 +1,10 @@
-version: '3'
+version: "3"
 services:
   hot-octopuss-aurora-strapi:
     container_name: hot-octopuss-aurora-strapi
     build: .
     image: hot-octopuss-aurora-strapi:latest
     restart: unless-stopped
-    env_file: .env
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: hot-octopuss-aurora-strapiDB
@@ -24,17 +23,16 @@ services:
       - ./.env:/opt/app/.env
       - ./public/uploads:/opt/app/public/uploads
     ports:
-      - '1337:1337'
+      - "1337:1337"
     networks:
       - hot-octopuss-aurora-strapi
     depends_on:
       - hot-octopuss-aurora-strapiDB
-      
+
   hot-octopuss-aurora-strapiDB:
     container_name: hot-octopuss-aurora-strapiDB
     platform: linux/amd64 #for platform error on Apple M1 chips
     restart: unless-stopped
-    env_file: .env
     image: postgres:14.5-alpine
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
@@ -45,7 +43,7 @@ services:
       #- ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
 
     ports:
-      - '5432:5432'
+      - "5432:5432"
     networks:
       - hot-octopuss-aurora-strapi
 
